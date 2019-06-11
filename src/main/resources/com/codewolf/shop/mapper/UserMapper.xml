@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codewolf.shop.mapper.UserMapper">
+    <select id="checkLogin" resultMap="userMap">
+      select u_id , u_username ,u_password from t_user where u_username = #{username}
+       and u_password = #{password}
+   </select>
+    <resultMap id="userMap" type="User">
+        <id column="u_id" property="id"/>
+        <result column="u_username" property="username"/>
+        <result column="u_password" property="password"/>
+    </resultMap>
+</mapper>
