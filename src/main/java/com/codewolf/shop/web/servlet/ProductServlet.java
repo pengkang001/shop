@@ -37,7 +37,7 @@ public class ProductServlet extends HttpServlet {
     private void edit(HttpServletRequest req, HttpServletResponse resp, IProductService service) throws ServletException, IOException {
         String strId = req.getParameter("id");
         if (!StringUtil.isNull(strId)) {
-            Product product = service.get(Long.parseLong("strId"));
+            Product product = service.get(Long.parseLong(strId));
             if (product != null)
                 req.setAttribute("product", product);
         }
@@ -55,10 +55,9 @@ public class ProductServlet extends HttpServlet {
         String account = req.getParameter("account");
         String dirId = req.getParameter("dirId");
         Product product = new Product();
-        product.setProductName(productName);
-        product.setProductSn(productSn);
+        product.setName(productName);
         if (!StringUtil.isNull(salePrice))
-            product.setSalePrice(new BigDecimal(salePrice));
+            product.setPrice(new BigDecimal(salePrice));
         if (!StringUtil.isNull(account))
             product.setAccount(Integer.parseInt(account));
         if (!StringUtil.isNull(dirId))

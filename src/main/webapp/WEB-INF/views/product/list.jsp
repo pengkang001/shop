@@ -39,7 +39,6 @@
     <table border="1" width="70%">
         <thead>
         <tr>
-            <th>商品编码</th>
             <th>商品名称</th>
             <th>商品售价</th>
             <th>商品库存</th>
@@ -50,11 +49,16 @@
         <tbody>
         <c:forEach items="${products}" var="product">
             <tr>
-                <td>${product.productSn}</td>
-                <td>${product.productName}</td>
-                <td>${product.salePrice}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
                 <td>${product.account}</td>
-                <td>${product.dirId}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${product.dirId==1}">无线鼠标</c:when>
+                        <c:when test="${product.dirId==2}">有线鼠标</c:when>
+                        <c:when test="${product.dirId==3}">游戏鼠标</c:when>
+                    </c:choose>
+                </td>
                 <td><a href="/product?cmd=edit&id=${product.id}">编辑 </a>|<a
                         href="/product?cmd=delete&id=${product.id}">删除 </a></td>
             </tr>

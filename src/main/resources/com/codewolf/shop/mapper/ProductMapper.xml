@@ -2,38 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codewolf.shop.mapper.ProductMapper">
     <insert id="insert">
-		insert into t_product (p_sn , p_name , p_price ,
-		p_account , dir_id)
-		values(#{productSn},#{productName},#{salePrice},#{account},#{dirId})
+		insert into product ( name , price ,
+		account , dir_id)
+		values(#{name},#{price},#{account},#{dirId})
 	</insert>
     <insert id="update">
-		update t_product set  p_sn = #{productSn}, p_name = #{productName}, 
-		p_price =#{salePrice},p_account =#{account}, dir_id  = #{dirId} where p_id = #{id}
+		update product set  name = #{name}, 
+		price =#{price},account =#{account}, dir_id  = #{dirId} where id = #{id}
 	</insert>
 
     <delete id="delete">
-		delete from t_product where p_id = #{id}
+		delete from product where id = #{id}
 	</delete>
     <select id="get" resultMap="productMap">
-		select p_id ,p_sn ,  p_name, p_price,dir_id,p_account from t_product where p_id = #{id}
+		select id ,  name, price,dir_id,account from product where id = #{id}
 	</select>
 
     <sql id="where">
         <where>
             <if test="key != null">
-                (p_sn like concat('%',#{key},'%') or p_name like concat('%',#{key},'%'))
+               name like concat('%',#{key},'%'))
             </if>
             <if test="min != null">
-                and p_price &gt;= #{min}
+                and price &gt;= #{min}
             </if>
             <if test="max != null">
-                and p_price &lt;= #{max}
+                and price &lt;= #{max}
             </if>
             <if test="isEmpty != null  and  isEmpty == true">
-                and p_account = 0
+                and account = 0
             </if>
             <if test="isEmpty != null  and  isEmpty == false">
-                and p_account &gt; 0
+                and account &gt; 0
             </if>
             <if test="dirId != null">
                 and dir_id = #{dirId}
@@ -42,23 +42,22 @@
     </sql>
 
     <select id="list" resultType="java.util.List" resultMap="productMap">
-        select p_id ,p_sn , p_name, p_price,dir_id,p_account from t_product
+        select id , name, price,dir_id,account from product
         <include refid="where"/>
         limit #{start} , #{pageSize}
     </select>
 
     <select id="count" resultType="java.lang.Integer" >
-        select count(p_id)  from t_product
+        select count(id)  from product
         <include refid="where"/>
     </select>
 
     <resultMap type="Product" id="productMap">
-        <id column="p_id" property="id"/>
-        <result column="p_sn" property="productSn"/>
-        <result column="p_name" property="productName"/>
-        <result column="p_price" property="salePrice"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
         <result column="dir_id" property="dirId"/>
-        <result column="p_account" property="account"/>
+        <result column="account" property="account"/>
     </resultMap>
 
 </mapper>

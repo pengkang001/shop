@@ -16,13 +16,13 @@ public class ProductDaoTest {
 
     @Test
     public void save() {
-        service.save(new Product(null,"SB1001","双飞燕M101鼠标",new BigDecimal
+        service.save(new Product(null,"双飞燕M101鼠标",new BigDecimal
                 ("120"),1L,10));
     }
 
     @Test
     public void update() {
-        service.update(new Product(11L,"SB1001","双飞燕M101鼠标",new BigDecimal
+        service.update(new Product(11L,"双飞燕M101鼠标",new BigDecimal
                 ("120"),1L,10));
     }
 
